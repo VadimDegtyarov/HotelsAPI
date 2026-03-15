@@ -1,0 +1,149 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <changeSet author="vadim (generated)" id="1773584571454-1">
+        <createTable tableName="ADDRESSES">
+            <column name="HOUSE_NUMBER" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="HOTEL_ID" type="BIGINT"/>
+            <column autoIncrement="true" name="ID" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="CONSTRAINT_DA"/>
+            </column>
+            <column name="COUNTRY" type="VARCHAR(56)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CITY" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="STREET" type="VARCHAR(168)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="POST_CODE" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="vadim (generated)" id="1773584571454-2">
+        <createTable tableName="AMENITIES">
+            <column autoIncrement="true" name="ID" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="CONSTRAINT_AF"/>
+            </column>
+            <column name="NAME" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="vadim (generated)" id="1773584571454-3">
+        <createTable tableName="ARRIVAL_TIME">
+            <column name="CHECK_IN" type="time">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CHECK_OUT" type="time"/>
+            <column name="HOTEL_ID" type="BIGINT"/>
+            <column autoIncrement="true" name="ID" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="CONSTRAINT_79"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="vadim (generated)" id="1773584571454-4">
+        <createTable tableName="CONTACTS">
+            <column name="HOTEL_ID" type="BIGINT"/>
+            <column autoIncrement="true" name="ID" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="CONSTRAINT_CD35"/>
+            </column>
+            <column name="PHONE" type="VARCHAR(19)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="EMAIL" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="vadim (generated)" id="1773584571454-5">
+        <createTable tableName="HOTELS">
+            <column autoIncrement="true" name="ID" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="CONSTRAINT_7F5"/>
+            </column>
+            <column name="BRAND" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="NAME" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DESCRIPTION" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="vadim (generated)" id="1773584571454-6">
+        <createTable tableName="HOTELS_AMENITIES">
+            <column name="AMENITY_ID" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="CONSTRAINT_77"/>
+            </column>
+            <column name="HOTEL_ID" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="CONSTRAINT_77"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="vadim (generated)" id="1773584571454-7">
+        <addUniqueConstraint columnNames="HOTEL_ID" constraintName="CONSTRAINT_7" tableName="ARRIVAL_TIME"/>
+    </changeSet>
+    <changeSet author="vadim (generated)" id="1773584571454-9">
+        <addUniqueConstraint columnNames="NAME" constraintName="CONSTRAINT_A" tableName="AMENITIES"/>
+    </changeSet>
+    <changeSet author="vadim (generated)" id="1773584571454-10">
+        <addUniqueConstraint columnNames="HOTEL_ID" constraintName="CONSTRAINT_C" tableName="CONTACTS"/>
+    </changeSet>
+    <changeSet author="vadim (generated)" id="1773584571454-11">
+        <addUniqueConstraint columnNames="PHONE" constraintName="CONSTRAINT_CD" tableName="CONTACTS"/>
+    </changeSet>
+    <changeSet author="vadim (generated)" id="1773584571454-12">
+        <addUniqueConstraint columnNames="EMAIL" constraintName="CONSTRAINT_CD3" tableName="CONTACTS"/>
+    </changeSet>
+    <changeSet author="vadim (generated)" id="1773584571454-13">
+        <addUniqueConstraint columnNames="HOTEL_ID" constraintName="CONSTRAINT_D" tableName="ADDRESSES"/>
+    </changeSet>
+    <changeSet author="vadim (generated)" id="1773584571454-14">
+        <createIndex associatedWith="" indexName="FKFPQ8E3BN6ETQREMJ5N7VVGBTQ_INDEX_7" tableName="HOTELS_AMENITIES">
+            <column name="AMENITY_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="vadim (generated)" id="1773584571454-15">
+        <createIndex associatedWith="" indexName="FKKJP93S5OHWDFD05REWJXN4N59_INDEX_7" tableName="HOTELS_AMENITIES">
+            <column name="HOTEL_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="vadim (generated)" id="1773584571454-16">
+        <addForeignKeyConstraint baseColumnNames="AMENITY_ID" baseTableName="HOTELS_AMENITIES"
+                                 constraintName="FKFPQ8E3BN6ETQREMJ5N7VVGBTQ" deferrable="false"
+                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+                                 referencedColumnNames="ID" referencedTableName="AMENITIES" validate="true"/>
+    </changeSet>
+    <changeSet author="vadim (generated)" id="1773584571454-17">
+        <addForeignKeyConstraint baseColumnNames="HOTEL_ID" baseTableName="ARRIVAL_TIME"
+                                 constraintName="FKFT0NPWFAGVDRACJG5TF1RUCA" deferrable="false"
+                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+                                 referencedColumnNames="ID" referencedTableName="HOTELS" validate="true"/>
+    </changeSet>
+    <changeSet author="vadim (generated)" id="1773584571454-18">
+        <addForeignKeyConstraint baseColumnNames="HOTEL_ID" baseTableName="CONTACTS"
+                                 constraintName="FKGK34RFRQNR21XTTFJUUJKD9K8" deferrable="false"
+                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+                                 referencedColumnNames="ID" referencedTableName="HOTELS" validate="true"/>
+    </changeSet>
+    <changeSet author="vadim (generated)" id="1773584571454-19">
+        <addForeignKeyConstraint baseColumnNames="HOTEL_ID" baseTableName="HOTELS_AMENITIES"
+                                 constraintName="FKKJP93S5OHWDFD05REWJXN4N59" deferrable="false"
+                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+                                 referencedColumnNames="ID" referencedTableName="HOTELS" validate="true"/>
+    </changeSet>
+    <changeSet author="vadim (generated)" id="1773584571454-20">
+        <addForeignKeyConstraint baseColumnNames="HOTEL_ID" baseTableName="ADDRESSES"
+                                 constraintName="FKO74RQWG6OE9BYYGD7IS2Y032Y" deferrable="false"
+                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+                                 referencedColumnNames="ID" referencedTableName="HOTELS" validate="true"/>
+    </changeSet>
+</databaseChangeLog>
